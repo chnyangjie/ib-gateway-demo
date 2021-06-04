@@ -10,10 +10,15 @@ import java.util.Calendar;
 @Slf4j
 public class Main {
     public static void main(String[] args) {
+        if (args.length<2){
+            log.error("execute like this: java -jar gateway-demo-jar-with-dependencies.jar 127.0.0.1 14444 1");
+            System.exit(-1);
+        }
+        log.info("execute with args: {}", args);
         log.info("init");
         IBClient ibClient = new IBClient();
         log.info("try connect");
-        ibClient.connect("127.0.0.1", 14444, 3);
+        ibClient.connect(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]));
         log.info("try connected");
 
         EClientSocket client = ibClient.getClient();
